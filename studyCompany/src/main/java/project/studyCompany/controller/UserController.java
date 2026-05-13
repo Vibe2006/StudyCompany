@@ -9,7 +9,7 @@ import project.studyCompany.dto.UserDTO;
 import project.studyCompany.service.UserService;
 
 @RestController
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/userAdmin")
 public class UserController {
     private final UserService userService;
 
@@ -17,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("allUsers")
     public ResponseEntity<Page<UserDTO>> getAllUsers(Pageable pageable){
         Page <UserDTO> findAll = userService.findAllPaged(pageable);
         return ResponseEntity.ok().body(findAll);
@@ -34,7 +34,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.update(id, userDTO));
     }
 
-    @DeleteMapping("/deleteAdminID={id}")
+    @DeleteMapping("/deleteAdminInID={id}")
     public ResponseEntity<UserDTO> deleteAdmin(@PathVariable Long id){
         userService.delete(id);
         return ResponseEntity.noContent().build();
